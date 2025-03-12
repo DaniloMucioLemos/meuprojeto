@@ -98,6 +98,7 @@ export default function Home() {
   })
 
   const [isContactVisible, setIsContactVisible] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -140,7 +141,6 @@ export default function Home() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
         className="glass-effect sticky top-0 z-50 border-b border-dark-border/50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -179,6 +179,8 @@ export default function Home() {
                 </div>
               </Link>
             </motion.div>
+
+            {/* Menu Desktop */}
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Link href="#sobre" className="nav-link">Sobre</Link>
@@ -205,7 +207,86 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+
+            {/* Botão Menu Mobile */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-400 hover:bg-dark-accent/20 focus:outline-none transition-colors"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Abrir menu principal</span>
+                {!isMenuOpen ? (
+                  <svg
+                    className="block h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    className="block h-8 w-8"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Menu Mobile */}
+          <motion.div
+            initial={false}
+            animate={isMenuOpen ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className={`md:hidden overflow-hidden bg-dark-secondary/95 backdrop-blur-sm rounded-lg mt-2 ${isMenuOpen ? 'border border-dark-border/50' : ''}`}
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <Link
+                href="#sobre"
+                className="text-white hover:bg-blue-500/20 hover:text-blue-400 block px-3 py-4 rounded-md text-base font-medium transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sobre
+              </Link>
+              <Link
+                href="#portfolio"
+                className="text-white hover:bg-blue-500/20 hover:text-blue-400 block px-3 py-4 rounded-md text-base font-medium transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Portfolio
+              </Link>
+              <Link
+                href="#contato"
+                className="text-white hover:bg-blue-500/20 hover:text-blue-400 block px-3 py-4 rounded-md text-base font-medium transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contato
+              </Link>
+              <Link
+                href="/produtos"
+                className="bg-blue-500 text-white hover:bg-blue-600 block px-3 py-4 rounded-md text-base font-medium transition-colors text-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Produtos
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </motion.nav>
 

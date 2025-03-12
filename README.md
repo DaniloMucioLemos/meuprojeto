@@ -24,26 +24,11 @@ Site profissional desenvolvido com Next.js, TailwindCSS e Framer Motion.
 - Node.js 18+
 - npm ou yarn
 
-## 🔧 Instalação
-
-```bash
-# Clone o repositório
-git clone https://github.com/SEU_USUARIO/NOME_DO_REPOSITORIO.git
-
-# Entre no diretório
-cd NOME_DO_REPOSITORIO
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-```
 
 ## 📱 Contato
 
 - WhatsApp: (16) 99745-2118
-- Email: [seu-email@email.com]
+- Email: [danmuciolemos@gmail.com]
 
 ## 📄 Licença
 
