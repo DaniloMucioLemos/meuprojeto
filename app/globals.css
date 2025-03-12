@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 231, 235, 240;
+  --background-start-rgb: 10, 25, 41;
+  --background-end-rgb: 19, 47, 76;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(30, 73, 118, 0.15) 0%,
+    rgba(10, 25, 41, 0.15) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-dark-accent hover:bg-dark-hover text-dark-text px-4 py-2 rounded-md transition-all duration-300
+    hover:shadow-[0_0_15px_rgba(30,73,118,0.5)] transform hover:-translate-y-1;
+  }
+  
+  .card {
+    @apply bg-dark-secondary/80 backdrop-blur-sm p-6 rounded-lg border border-dark-border
+    transition-all duration-300 hover:shadow-[0_0_20px_rgba(30,73,118,0.3)]
+    hover:transform hover:-translate-y-2;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold mb-6 text-dark-text relative
+    after:content-[''] after:absolute after:left-0 after:-bottom-2
+    after:w-20 after:h-1 after:bg-dark-accent after:rounded-full;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-md bg-dark-secondary/70 border border-dark-border/50;
+  }
+
+  .glow-effect {
+    @apply relative;
+  }
+
+  .glow-effect::after {
+    @apply content-[''] absolute inset-0 rounded-lg;
+    background: radial-gradient(circle at center, rgba(30, 73, 118, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-effect:hover::after {
+    opacity: 1;
+  }
+
+  .nav-link {
+    @apply relative text-dark-text-secondary hover:text-dark-text transition-colors duration-300
+    after:content-[''] after:absolute after:left-0 after:-bottom-1
+    after:w-0 after:h-0.5 after:bg-dark-accent
+    after:transition-all after:duration-300
+    hover:after:w-full;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 rounded-md bg-dark-secondary/80 backdrop-blur-sm
+    border border-dark-border focus:outline-none focus:ring-2 focus:ring-dark-accent
+    transition-all duration-300;
+  }
+} 
