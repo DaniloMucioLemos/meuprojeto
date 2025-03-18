@@ -4,8 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { FiGithub, FiLinkedin, FiMail, FiArrowDown, FiShoppingCart, FiCreditCard, FiPackage, FiPieChart, FiTrendingUp, FiBarChart2, FiNavigation, FiSmartphone, FiMap, FiUsers, FiMessageCircle, FiShare2, FiDatabase, FiDollarSign, FiLayers, FiBook, FiAward, FiMonitor, FiLayout, FiFileText, FiSearch, FiEdit, FiTarget, FiZap, FiCalendar } from 'react-icons/fi'
-import React, { useState } from 'react'
+import { FiGithub, FiLinkedin, FiMail, FiArrowDown, FiShoppingCart, FiCreditCard, FiPackage, FiPieChart, FiTrendingUp, FiBarChart2, FiNavigation, FiSmartphone, FiMap, FiUsers, FiMessageCircle, FiShare2, FiDatabase, FiDollarSign, FiLayers, FiBook, FiAward, FiMonitor, FiLayout, FiFileText, FiSearch, FiEdit, FiTarget, FiZap, FiCalendar, FiVideo } from 'react-icons/fi'
+import React, { useState, useEffect } from 'react'
 import ProjectCard from './components/ProjectCard'
 import emailjs from '@emailjs/browser'
 
@@ -99,6 +99,7 @@ export default function Home() {
 
   const [isContactVisible, setIsContactVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [showAllProjects, setShowAllProjects] = useState(false)
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -190,7 +191,7 @@ export default function Home() {
                   href="/produtos" 
                   className="btn-primary px-4 py-2 flex items-center gap-2 text-sm"
                 >
-                  <span>Produtos</span>
+                  <span>Loja</span>
                   <svg 
                     className="w-4 h-4" 
                     fill="none" 
@@ -283,7 +284,7 @@ export default function Home() {
                 className="bg-blue-500 text-white hover:bg-blue-600 block px-3 py-4 rounded-md text-base font-medium transition-colors text-center"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Produtos
+                Loja
               </Link>
             </div>
           </motion.div>
@@ -380,6 +381,47 @@ export default function Home() {
           {/* Decorative Elements */}
           <div className="absolute top-1/4 left-10 w-20 h-20 bg-blue-500/10 rounded-full blur-xl"></div>
           <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-dark-accent/10 rounded-full blur-xl"></div>
+
+          {/* Mensagens Motivacionais */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="fixed right-8 top-[80vh] z-30 max-w-xs"
+          >
+            {(() => {
+              const mensagens = [
+                "Transformando ideias em realidade digital",
+                "Inovação é nossa paixão",
+                "Tecnologia que faz a diferença",
+                "Seu sucesso é nossa missão",
+                "Criatividade sem limites"
+              ];
+              const [mensagemAtual, setMensagemAtual] = useState(0);
+
+              useEffect(() => {
+                const interval = setInterval(() => {
+                  setMensagemAtual((atual) => (atual + 1) % mensagens.length);
+                }, 3000);
+                return () => clearInterval(interval);
+              }, []);
+
+              return (
+                <motion.div
+                  key={mensagemAtual}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="glass-effect p-4 rounded-lg border border-dark-border/50 shadow-lg"
+                >
+                  <motion.p
+                    className="text-sm md:text-base font-medium bg-gradient-to-r from-blue-400 to-dark-accent bg-clip-text text-transparent"
+                  >
+                    {mensagens[mensagemAtual]}
+                  </motion.p>
+                </motion.div>
+              );
+            })()}
+          </motion.div>
         </motion.div>
       </section>
 
@@ -558,8 +600,56 @@ export default function Home() {
                 image: "/images/projects/eventos.jpg",
                 tags: ["Next.js", "Firebase", "TailwindCSS"],
                 icons: [FiCalendar, FiUsers, FiAward]
+              },
+              {
+                id: "app-delivery",
+                title: "App de Delivery",
+                desc: "Aplicativo de entrega com rastreamento em tempo real, pagamento integrado e área do estabelecimento.",
+                image: "/images/projects/delivery.jpg",
+                tags: ["React Native", "Node.js", "MongoDB"],
+                icons: [FiNavigation, FiSmartphone, FiMap]
+              },
+              {
+                id: "sistema-erp",
+                title: "Sistema ERP",
+                desc: "Sistema de gestão empresarial completo com módulos de vendas, estoque, financeiro e relatórios.",
+                image: "/images/projects/erp.jpg",
+                tags: ["Next.js", "PostgreSQL", "Docker"],
+                icons: [FiDatabase, FiDollarSign, FiLayers]
+              },
+              {
+                id: "plataforma-ead",
+                title: "Plataforma EAD",
+                desc: "Ambiente virtual de aprendizagem com aulas ao vivo, conteúdo gravado e certificação.",
+                image: "/images/projects/education.jpg",
+                tags: ["React", "Node.js", "MongoDB"],
+                icons: [FiBook, FiVideo, FiAward]
+              },
+              {
+                id: "rede-social",
+                title: "Rede Social",
+                desc: "Rede social com feed personalizado, chat em tempo real e compartilhamento de mídia.",
+                image: "/images/projects/social.jpg",
+                tags: ["Next.js", "Socket.io", "MongoDB"],
+                icons: [FiUsers, FiMessageCircle, FiShare2]
+              },
+              {
+                id: "dashboard-analytics",
+                title: "Dashboard Analytics",
+                desc: "Painel de análise de dados com gráficos interativos e relatórios personalizados.",
+                image: "/images/projects/dashboard.jpg",
+                tags: ["React", "D3.js", "Node.js"],
+                icons: [FiPieChart, FiTrendingUp, FiBarChart2]
+              },
+              {
+                id: "marketplace",
+                title: "Marketplace",
+                desc: "Plataforma de marketplace com múltiplos vendedores, sistema de avaliações e comissões.",
+                image: "/images/projects/marketplace.jpg",
+                tags: ["Next.js", "Stripe Connect", "PostgreSQL"],
+                icons: [FiShoppingCart, FiUsers, FiDollarSign]
               }
-            ].map((project, index) => (
+            ].slice(0, showAllProjects ? 12 : 6).map((project, index) => (
               <ProjectCard
                 key={index}
                 project={project}
@@ -567,6 +657,31 @@ export default function Home() {
                 inView={portfolioInView}
               />
             ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setShowAllProjects(!showAllProjects)}
+              className="btn-primary px-8 py-3 flex items-center gap-2"
+            >
+              <span>{showAllProjects ? 'Mostrar Menos' : 'Ver Mais'}</span>
+              <motion.svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                animate={{ rotate: showAllProjects ? 180 : 0 }}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </motion.svg>
+            </motion.button>
           </div>
         </div>
       </motion.section>
@@ -691,29 +806,138 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="glass-effect py-8 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="flex justify-center mb-4">
-            <motion.a
-              href="https://wa.me/5516997452118"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.2, rotate: 5 }}
-              className="text-dark-text-secondary hover:text-dark-text text-3xl"
-            >
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 448 512" 
-                fill="currentColor" 
-                className="w-8 h-8"
-              >
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-              </svg>
-            </motion.a>
+      <footer className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-dark-secondary/30 backdrop-blur-sm"></div>
+        <div className="glass-effect border-t border-dark-border/50">
+          <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            {/* Grid Principal */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+              {/* Logo e Descrição */}
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <div className="relative w-10 h-10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-dark-accent rounded-lg transform rotate-3 opacity-70"></div>
+                    <div className="absolute inset-0 bg-dark-secondary rounded-lg flex items-center justify-center">
+                      <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-dark-accent bg-clip-text text-transparent">
+                        DML
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-dark-text">DML WebDev</h3>
+                    <p className="text-sm text-dark-text-secondary">Soluções Digitais</p>
+                  </div>
+                </div>
+                <p className="text-dark-text-secondary text-sm">
+                  Transformando ideias em experiências digitais memoráveis através de tecnologias modernas e design inovador.
+                </p>
+              </div>
+
+              {/* Links Rápidos */}
+              <div>
+                <h3 className="text-dark-text font-semibold mb-4">Links Rápidos</h3>
+                <ul className="space-y-2">
+                  <li>
+                    <Link href="#sobre" className="text-dark-text-secondary hover:text-dark-accent transition-colors text-sm">Sobre</Link>
+                  </li>
+                  <li>
+                    <Link href="#portfolio" className="text-dark-text-secondary hover:text-dark-accent transition-colors text-sm">Portfolio</Link>
+                  </li>
+                  <li>
+                    <Link href="#contato" className="text-dark-text-secondary hover:text-dark-accent transition-colors text-sm">Contato</Link>
+                  </li>
+                  <li>
+                    <Link href="/produtos" className="text-dark-text-secondary hover:text-dark-accent transition-colors text-sm">Loja</Link>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Contato */}
+              <div>
+                <h3 className="text-dark-text font-semibold mb-4">Contato</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-center space-x-2 text-dark-text-secondary">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span className="text-sm">(16) 99745-2118</span>
+                  </li>
+                  <li className="flex items-center space-x-2 text-dark-text-secondary">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-sm">danmuciolemos@gmail.com</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Redes Sociais */}
+              <div>
+                <h3 className="text-dark-text font-semibold mb-4">Redes Sociais</h3>
+                <div className="flex space-x-4">
+                  <motion.a
+                    href="https://wa.me/5516997452118"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-10 h-10 rounded-lg bg-dark-accent/20 flex items-center justify-center text-dark-text hover:bg-dark-accent hover:text-white transition-colors"
+                  >
+                    <svg className="w-5 h-5" viewBox="0 0 448 512" fill="currentColor">
+                      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                    </svg>
+                  </motion.a>
+                  <motion.a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-10 h-10 rounded-lg bg-dark-accent/20 flex items-center justify-center text-dark-text hover:bg-dark-accent hover:text-white transition-colors"
+                  >
+                    <FiGithub className="w-5 h-5" />
+                  </motion.a>
+                  <motion.a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-10 h-10 rounded-lg bg-dark-accent/20 flex items-center justify-center text-dark-text hover:bg-dark-accent hover:text-white transition-colors"
+                  >
+                    <FiLinkedin className="w-5 h-5" />
+                  </motion.a>
+                </div>
+              </div>
+            </div>
+
+            {/* Linha Divisória com Gradiente */}
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-dark-border/30"></div>
+              </div>
+              <div className="relative flex justify-center">
+                <div className="px-4 bg-dark-secondary/30 backdrop-blur-sm">
+                  <motion.div
+                    className="w-12 h-12 rounded-full bg-dark-accent/20 flex items-center justify-center"
+                    animate={{ 
+                      rotate: 360,
+                      background: ["rgba(30,73,118,0.2)", "rgba(59,130,246,0.2)", "rgba(30,73,118,0.2)"]
+                    }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                  >
+                    <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-dark-accent bg-clip-text text-transparent">
+                      DML
+                    </span>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="mt-8 text-center">
+              <p className="text-dark-text-secondary text-sm">
+                &copy; {new Date().getFullYear()} DML WebDesenvolvimentos. Todos os direitos reservados.
+              </p>
+            </div>
           </div>
-          <p className="text-dark-text-secondary">
-            &copy; {new Date().getFullYear()} DML WebDesenvolvimentos. Todos os direitos reservados.
-          </p>
         </div>
       </footer>
 
