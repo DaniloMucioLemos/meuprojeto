@@ -7,7 +7,9 @@ import ProjectCard from '../components/ProjectCard'
 import { useInView } from 'react-intersection-observer'
 import { FiMonitor, FiLayout, FiTrendingUp, FiFileText, FiSearch, FiEdit, 
          FiShoppingCart, FiCreditCard, FiPackage, FiMessageCircle, FiShare2, 
-         FiTarget, FiZap, FiCalendar, FiUsers, FiAward } from 'react-icons/fi'
+         FiTarget, FiZap, FiCalendar, FiUsers, FiAward, FiVideo, FiMusic,
+         FiBook, FiMap, FiGlobe, FiDatabase, FiCloud, FiLock, FiBarChart2,
+         FiSmartphone, FiMessageSquare, FiMail, FiUserCheck, FiShield } from 'react-icons/fi'
 
 export default function PortfolioPage() {
   const [ref, inView] = useInView({
@@ -63,6 +65,54 @@ export default function PortfolioPage() {
       image: "/images/projects/eventos.jpg",
       tags: ["Next.js", "Firebase", "TailwindCSS"],
       icons: [FiCalendar, FiUsers, FiAward]
+    },
+    {
+      id: "aplicativo-mobile",
+      title: "Aplicativo Mobile",
+      desc: "Aplicativo mobile nativo para iOS e Android com interface intuitiva e recursos avançados.",
+      image: "/images/projects/delivery.jpg",
+      tags: ["React Native", "TypeScript", "Firebase"],
+      icons: [FiSmartphone, FiCloud, FiLock]
+    },
+    {
+      id: "plataforma-educacional",
+      title: "Plataforma Educacional",
+      desc: "Sistema de ensino online com aulas ao vivo, materiais didáticos e avaliações.",
+      image: "/images/projects/education.jpg",
+      tags: ["Next.js", "WebRTC", "MongoDB"],
+      icons: [FiBook, FiVideo, FiUsers]
+    },
+    {
+      id: "sistema-de-gestao",
+      title: "Sistema de Gestão",
+      desc: "Software de gestão empresarial com módulos integrados para controle total da empresa.",
+      image: "/images/projects/dashboard.jpg",
+      tags: ["Vue.js", "Node.js", "PostgreSQL"],
+      icons: [FiBarChart2, FiDatabase, FiUsers]
+    },
+    {
+      id: "rede-social",
+      title: "Rede Social",
+      desc: "Plataforma social com feed de conteúdo, mensagens e grupos de interesse.",
+      image: "/images/projects/social.jpg",
+      tags: ["React", "GraphQL", "Redis"],
+      icons: [FiUsers, FiMessageSquare, FiShare2]
+    },
+    {
+      id: "marketplace",
+      title: "Marketplace",
+      desc: "Plataforma de marketplace com múltiplos vendedores e sistema de pagamentos.",
+      image: "/images/projects/marketplace.jpg",
+      tags: ["Next.js", "Stripe", "Elasticsearch"],
+      icons: [FiShoppingCart, FiUsers, FiCreditCard]
+    },
+    {
+      id: "sistema-de-seguranca",
+      title: "Sistema de Segurança",
+      desc: "Sistema de monitoramento e segurança com câmeras e sensores integrados.",
+      image: "/images/projects/dashboard.jpg",
+      tags: ["Python", "TensorFlow", "WebRTC"],
+      icons: [FiShield, FiVideo, FiLock]
     }
   ]
 
@@ -105,25 +155,6 @@ export default function PortfolioPage() {
               Conheça alguns dos projetos que desenvolvi, combinando tecnologia moderna 
               com design intuitivo para criar experiências digitais excepcionais.
             </p>
-          </motion.div>
-
-          {/* Filtros */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-4 mb-12"
-          >
-            {["Todos", "Web", "E-commerce", "Apps", "Design"].map((filter, index) => (
-              <motion.button
-                key={index}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-2 rounded-full bg-dark-accent/20 text-dark-text hover:bg-dark-accent/30 transition-colors"
-              >
-                {filter}
-              </motion.button>
-            ))}
           </motion.div>
 
           {/* Grid de Projetos */}
