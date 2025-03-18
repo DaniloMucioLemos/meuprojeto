@@ -9,6 +9,7 @@ export default function RadioButton() {
   const [showVolumeControl, setShowVolumeControl] = useState(false)
   const audioRef = React.useRef(null)
   const retryAttemptsRef = React.useRef(0)
+  const buttonRef = React.useRef(null)
 
   useEffect(() => {
     const initializeAudio = async () => {
@@ -100,6 +101,10 @@ export default function RadioButton() {
     }
   }
 
+  const adjustVolume = (delta: number) => {
+    handleVolumeChange(Math.max(0, Math.min(1, volume + delta)))
+  }
+
   return (
     <motion.div
       className="fixed bottom-8 left-8 z-50"
@@ -113,64 +118,45 @@ export default function RadioButton() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <button
+        <motion.button
+          ref={buttonRef}
           onClick={toggleRadio}
-          className="relative"
+          className={`fixed bottom-4 left-4 glass-effect rounded-full p-2 md:p-4 border border-dark-border/50 shadow-lg transition-all duration-300 ${
+            isPlaying ? 'bg-dark-accent/20' : 'bg-dark-secondary/20'
+          }`}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
-          <div className={`w-12 h-12 rounded-full ${isPlaying ? 'bg-dark-accent' : 'bg-dark-secondary'} flex items-center justify-center transition-colors duration-300`}>
-            {isPlaying ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-dark-text"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-dark-text"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            )}
-          </div>
-          {isPlaying && (
+          <div className="relative">
             <motion.div
-              className="absolute -inset-1 rounded-full border-2 border-dark-accent"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [1, 0.5, 1]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          )}
-        </button>
+              className={`absolute inset-0 bg-gradient-to-r from-blue-500/20 to-dark-accent/20 rounded-full ${
+                isPlaying ? 'animate-pulse' : ''
+              }`}
+            ></motion.div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 md:w-8 md:h-8 text-dark-text relative z-10"
+            >
+              {isPlaying ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z"
+                />
+              )}
+            </svg>
+          </div>
+        </motion.button>
         
         <div className="flex flex-col min-w-[100px]">
           <p className="text-dark-text text-sm font-medium">89 FM</p>
@@ -178,67 +164,58 @@ export default function RadioButton() {
         </div>
 
         <motion.div
-          className="relative flex items-center gap-2"
-          animate={{ 
-            width: showVolumeControl ? 'auto' : 0,
-            opacity: showVolumeControl ? 1 : 0
-          }}
-          transition={{ duration: 0.3 }}
+          className={`fixed bottom-4 left-16 md:left-20 glass-effect rounded-lg p-2 md:p-3 border border-dark-border/50 shadow-lg transition-all duration-300 ${
+            showVolumeControl ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'
+          }`}
         >
-          <button
-            onClick={() => handleVolumeChange(Math.max(0, volume - 0.1))}
-            className="text-dark-text hover:text-dark-accent transition-colors"
-            disabled={volume <= 0}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => adjustVolume(-0.1)}
+              className="text-dark-text hover:text-dark-accent transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 12H9"
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-4 h-4 md:w-5 md:h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+                />
+              </svg>
+            </button>
+
+            <div className="relative w-20 md:w-24 h-1 bg-dark-border/30 rounded-full overflow-hidden">
+              <motion.div
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-blue-400 to-dark-accent"
+                style={{ width: `${volume * 100}%` }}
               />
-            </svg>
-          </button>
+            </div>
 
-          <input
-            type="range"
-            min="0"
-            max="1"
-            step="0.01"
-            value={volume}
-            onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-            className="w-20 h-1 bg-dark-secondary rounded-lg appearance-none cursor-pointer"
-            style={{
-              background: `linear-gradient(to right, #1E4976 ${volume * 100}%, #132F4C ${volume * 100}%)`
-            }}
-          />
-
-          <button
-            onClick={() => handleVolumeChange(Math.min(1, volume + 0.1))}
-            className="text-dark-text hover:text-dark-accent transition-colors"
-            disabled={volume >= 1}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            <button
+              onClick={() => adjustVolume(0.1)}
+              className="text-dark-text hover:text-dark-accent transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-4 h-4 md:w-5 md:h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"
+                />
+              </svg>
+            </button>
+          </div>
         </motion.div>
       </motion.div>
     </motion.div>

@@ -386,7 +386,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            className="fixed right-8 top-[80vh] z-30 max-w-xs"
+            className="fixed right-8 top-[80vh] z-30 max-w-xs hidden md:block"
           >
             {(() => {
               const mensagens = [
