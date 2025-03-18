@@ -70,7 +70,7 @@ export default function PortfolioPage() {
       id: "aplicativo-mobile",
       title: "Aplicativo Mobile",
       desc: "Aplicativo mobile nativo para iOS e Android com interface intuitiva e recursos avançados.",
-      image: "/images/projects/delivery.jpg",
+      image: "/images/projects/mobile.jpg",
       tags: ["React Native", "TypeScript", "Firebase"],
       icons: [FiSmartphone, FiCloud, FiLock]
     },
@@ -78,7 +78,7 @@ export default function PortfolioPage() {
       id: "plataforma-educacional",
       title: "Plataforma Educacional",
       desc: "Sistema de ensino online com aulas ao vivo, materiais didáticos e avaliações.",
-      image: "/images/projects/education.jpg",
+      image: "/images/projects/educacao.jpg",
       tags: ["Next.js", "WebRTC", "MongoDB"],
       icons: [FiBook, FiVideo, FiUsers]
     },
@@ -86,7 +86,7 @@ export default function PortfolioPage() {
       id: "sistema-de-gestao",
       title: "Sistema de Gestão",
       desc: "Software de gestão empresarial com módulos integrados para controle total da empresa.",
-      image: "/images/projects/dashboard.jpg",
+      image: "/images/projects/gestao.jpg",
       tags: ["Vue.js", "Node.js", "PostgreSQL"],
       icons: [FiBarChart2, FiDatabase, FiUsers]
     },
@@ -110,7 +110,7 @@ export default function PortfolioPage() {
       id: "sistema-de-seguranca",
       title: "Sistema de Segurança",
       desc: "Sistema de monitoramento e segurança com câmeras e sensores integrados.",
-      image: "/images/projects/dashboard.jpg",
+      image: "/images/projects/seguranca.jpg",
       tags: ["Python", "TensorFlow", "WebRTC"],
       icons: [FiShield, FiVideo, FiLock]
     }
