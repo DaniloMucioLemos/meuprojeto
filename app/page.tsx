@@ -9,8 +9,8 @@ import React, { useState, useEffect } from 'react'
 import ProjectCard from './components/ProjectCard'
 import emailjs from '@emailjs/browser'
 
-// Inicializar o EmailJS
-emailjs.init("XwKGxcZIYkxc_kYEC") // Public Key
+// Inicializar o EmailJS com a variável de ambiente
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '')
 
 const LogoLetters = () => {
   const letters = ["D", "M", "L"];
@@ -90,6 +90,128 @@ const FloatingIcons = ({ icons }) => {
     </div>
   );
 };
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  })
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Nome é obrigatório'
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email é obrigatório'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Email inválido'
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Mensagem é obrigatória'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      await emailjs.send(
+        'YOUR_SERVICE_ID', // Substitua pelo seu Service ID
+        'YOUR_TEMPLATE_ID', // Substitua pelo seu Template ID
+        formData
+      )
+      setSubmitStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      setSubmitStatus('error')
+      console.error('Erro ao enviar email:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    // Limpar erro quando o usuário começar a digitar
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={`w-full p-2 rounded ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+          placeholder="Seu nome"
+        />
+        {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+      </div>
+      
+      <div>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className={`w-full p-2 rounded ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+          placeholder="Seu email"
+        />
+        {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+      </div>
+      
+      <div>
+        <textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          className={`w-full p-2 rounded ${errors.message ? 'border-red-500' : 'border-gray-300'}`}
+          placeholder="Sua mensagem"
+          rows={4}
+        />
+        {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
+      </div>
+
+      <button
+        type="submit"
+        disabled={isSubmitting}
+        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:opacity-50"
+      >
+        {isSubmitting ? 'Enviando...' : 'Enviar Mensagem'}
+      </button>
+
+      {submitStatus === 'success' && (
+        <p className="text-green-500 text-center">Mensagem enviada com sucesso!</p>
+      )}
+      {submitStatus === 'error' && (
+        <p className="text-red-500 text-center">Erro ao enviar mensagem. Tente novamente.</p>
+      )}
+    </form>
+  )
+}
 
 export default function Home() {
   const [portfolioRef, portfolioInView] = useInView({
@@ -713,95 +835,14 @@ export default function Home() {
           >
             Entre em Contato
           </motion.h2>
-          <motion.form
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="mt-8 space-y-6 glass-effect p-8 rounded-lg"
-            onSubmit={(e) => {
-              e.preventDefault();
-              const form = e.target as HTMLFormElement;
-              
-              // Formata a mensagem para o WhatsApp
-              const nome = form.user_name.value;
-              const email = form.user_email.value;
-              const telefone = form.user_phone.value;
-              const mensagem = form.message.value;
-              
-              const mensagemFormatada = `*Novo Contato do Site*%0A%0A*Nome:* ${nome}%0A*Email:* ${email}%0A*Telefone:* ${telefone}%0A%0A*Mensagem:*%0A${mensagem}`;
-              
-              // Abre o WhatsApp Web com a mensagem formatada
-              window.open(`https://wa.me/5516997452118?text=${mensagemFormatada}`, '_blank');
-              
-              // Limpa o formulário
-              form.reset();
-            }}
           >
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium mb-2">Nome</label>
-              <input 
-                type="text" 
-                id="name" 
-                name="user_name"
-                required
-                className="input-field" 
-                placeholder="Seu nome completo"
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="user_email"
-                  required
-                  className="input-field" 
-                  placeholder="seu@email.com"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium mb-2">Telefone</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="user_phone"
-                  required
-                  className="input-field" 
-                  placeholder="(16) 99999-9999"
-                  pattern="^\(\d{2}\) \d{5}-\d{4}$"
-                  title="Digite um número de telefone no formato (99) 99999-9999"
-                />
-              </div>
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium mb-2">Mensagem</label>
-              <textarea 
-                id="message" 
-                name="message"
-                required
-                rows={4} 
-                className="input-field"
-                placeholder="Digite sua mensagem aqui..."
-              ></textarea>
-            </div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="btn-primary w-full flex items-center justify-center gap-2"
-            >
-              <span>Enviar via WhatsApp</span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 448 512" 
-                fill="currentColor" 
-                className="w-5 h-5"
-              >
-                <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
-              </svg>
-            </motion.button>
-          </motion.form>
+            <ContactForm />
+          </motion.div>
         </div>
       </section>
 

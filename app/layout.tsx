@@ -1,7 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import RadioButton from './components/RadioButton'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,7 +18,6 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`${inter.className} bg-dark-primary text-dark-text min-h-screen`}>
         {children}
-        <RadioButton />
       </body>
     </html>
   )

@@ -1,35 +1,68 @@
-# DML WebDesenvolvimentos
+# Site Portfolio
 
-Site profissional desenvolvido com Next.js, TailwindCSS e Framer Motion.
+Este é um site portfolio construído com Next.js, TypeScript e Tailwind CSS.
 
-## 🚀 Tecnologias
+## Configuração de Segurança
 
-- Next.js 14
-- React
-- TailwindCSS
-- Framer Motion
-- TypeScript
+### Variáveis de Ambiente
 
-## 📋 Funcionalidades
+Crie um arquivo `.env.local` na raiz do projeto com as seguintes variáveis:
 
-- Design responsivo
-- Animações suaves
-- Página de produtos
-- Integração com WhatsApp
-- Formulário de contato
-- Seção de portfólio
+```env
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=sua_chave_aqui
+NEXT_PUBLIC_SITE_URL=https://seu-dominio.com
+```
 
-## 💻 Pré-requisitos
+### Configuração do EmailJS
 
-- Node.js 18+
-- npm ou yarn
+1. Crie uma conta no [EmailJS](https://www.emailjs.com/)
+2. Crie um novo serviço de email
+3. Crie um template de email
+4. Substitua `YOUR_SERVICE_ID` e `YOUR_TEMPLATE_ID` no arquivo `app/page.tsx` pelos seus IDs
 
+## Instalação
 
-## 📱 Contato
+```bash
+# Instalar dependências
+npm install
 
-- WhatsApp: (16) 99745-2118
-- Email: [danmuciolemos@gmail.com]
+# Rodar em desenvolvimento
+npm run dev
 
-## 📄 Licença
+# Construir para produção
+npm run build
 
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes. 
+# Rodar em produção
+npm start
+```
+
+## Medidas de Segurança Implementadas
+
+- Headers de segurança configurados
+- Validação de formulários
+- Proteção contra XSS
+- CSP (Content Security Policy)
+- HTTPS forçado
+- Sanitização de dados
+- Rate limiting
+- Proteção contra CSRF
+
+## Boas Práticas de Segurança
+
+1. Mantenha todas as dependências atualizadas
+2. Use HTTPS em produção
+3. Implemente rate limiting
+4. Faça backup regular dos dados
+5. Monitore logs de segurança
+6. Realize testes de segurança regularmente
+
+## Scripts Disponíveis
+
+- `npm run dev`: Inicia o servidor de desenvolvimento
+- `npm run build`: Cria a build de produção
+- `npm start`: Inicia o servidor de produção
+- `npm run lint`: Executa o linter
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes. 
