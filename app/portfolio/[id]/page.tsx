@@ -15,7 +15,7 @@ const projects = [
     id: "site-institucional",
     title: "Site Institucional",
     desc: "Website moderno para empresa de tecnologia, com design responsivo, animações suaves e alto desempenho em SEO.",
-    image: "/images/projects/institucional.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "TailwindCSS", "Framer Motion"],
     icons: [FiMonitor, FiLayout, FiTrendingUp],
     longDescription: `Um site institucional moderno e profissional desenvolvido para uma empresa de tecnologia. 
@@ -43,7 +43,7 @@ const projects = [
     id: "portal-de-noticias",
     title: "Portal de Notícias",
     desc: "Portal de notícias dinâmico com sistema de categorias, busca avançada e painel administrativo completo.",
-    image: "/images/projects/portal.jpg",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1000",
     tags: ["React", "Node.js", "MongoDB"],
     icons: [FiFileText, FiSearch, FiEdit],
     longDescription: `Um portal de notícias completo e dinâmico desenvolvido para uma empresa de mídia. 
@@ -69,7 +69,7 @@ const projects = [
     id: "loja-virtual",
     title: "Loja Virtual",
     desc: "E-commerce completo com catálogo de produtos, carrinho de compras e integração com meios de pagamento.",
-    image: "/images/projects/loja.jpg",
+    image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "Stripe", "PostgreSQL"],
     icons: [FiShoppingCart, FiCreditCard, FiPackage],
     longDescription: `Uma loja virtual completa desenvolvida para uma empresa de varejo. 
@@ -95,7 +95,7 @@ const projects = [
     id: "blog-profissional",
     title: "Blog Profissional",
     desc: "Blog com design elegante, sistema de comentários, newsletter e integração com redes sociais.",
-    image: "/images/projects/blog.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "MDX", "TailwindCSS"],
     icons: [FiEdit, FiMessageCircle, FiShare2],
     longDescription: `Um blog profissional desenvolvido para um especialista em tecnologia. 
@@ -121,7 +121,7 @@ const projects = [
     id: "landing-page",
     title: "Landing Page",
     desc: "Landing page de alto impacto para produto digital, com foco em conversão e experiência do usuário.",
-    image: "/images/projects/landing.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["React", "GSAP", "Styled Components"],
     icons: [FiTrendingUp, FiTarget, FiZap],
     longDescription: `Uma landing page de alto impacto desenvolvida para um produto digital. 
@@ -147,7 +147,7 @@ const projects = [
     id: "site-de-eventos",
     title: "Site de Eventos",
     desc: "Plataforma para eventos online e presenciais com sistema de inscrição e área do participante.",
-    image: "/images/projects/eventos.jpg",
+    image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "Firebase", "TailwindCSS"],
     icons: [FiCalendar, FiUsers, FiAward],
     longDescription: `Uma plataforma completa para eventos desenvolvida para uma empresa de organização de eventos. 
@@ -173,7 +173,7 @@ const projects = [
     id: "aplicativo-mobile",
     title: "Aplicativo Mobile",
     desc: "Aplicativo mobile nativo para iOS e Android com interface intuitiva e recursos avançados.",
-    image: "/images/projects/mobile.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["React Native", "TypeScript", "Firebase"],
     icons: [FiSmartphone, FiCloud, FiLock],
     longDescription: `Um aplicativo mobile completo desenvolvido para uma startup de tecnologia. 
@@ -199,7 +199,7 @@ const projects = [
     id: "plataforma-educacional",
     title: "Plataforma Educacional",
     desc: "Sistema de ensino online com aulas ao vivo, materiais didáticos e avaliações.",
-    image: "/images/projects/educacao.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "WebRTC", "MongoDB"],
     icons: [FiBook, FiVideo, FiUsers],
     longDescription: `Uma plataforma educacional completa desenvolvida para uma instituição de ensino. 
@@ -225,7 +225,7 @@ const projects = [
     id: "sistema-de-gestao",
     title: "Sistema de Gestão",
     desc: "Software de gestão empresarial com módulos integrados para controle total da empresa.",
-    image: "/images/projects/gestao.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Vue.js", "Node.js", "PostgreSQL"],
     icons: [FiBarChart2, FiDatabase, FiUsers],
     longDescription: `Um sistema de gestão empresarial completo desenvolvido para empresas de médio e grande porte. 
@@ -251,7 +251,7 @@ const projects = [
     id: "rede-social",
     title: "Rede Social",
     desc: "Plataforma social com feed de conteúdo, mensagens e grupos de interesse.",
-    image: "/images/projects/social.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["React", "GraphQL", "Redis"],
     icons: [FiUsers, FiMessageSquare, FiShare2],
     longDescription: `Uma rede social moderna desenvolvida para conectar pessoas com interesses em comum. 
@@ -277,7 +277,7 @@ const projects = [
     id: "marketplace",
     title: "Marketplace",
     desc: "Plataforma de marketplace com múltiplos vendedores e sistema de pagamentos.",
-    image: "/images/projects/marketplace.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Next.js", "Stripe", "Elasticsearch"],
     icons: [FiShoppingCart, FiUsers, FiCreditCard],
     longDescription: `Um marketplace completo desenvolvido para conectar compradores e vendedores. 
@@ -303,7 +303,7 @@ const projects = [
     id: "sistema-de-seguranca",
     title: "Sistema de Segurança",
     desc: "Sistema de monitoramento e segurança com câmeras e sensores integrados.",
-    image: "/images/projects/seguranca.jpg",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
     tags: ["Python", "TensorFlow", "WebRTC"],
     icons: [FiShield, FiVideo, FiLock],
     longDescription: `Um sistema de segurança avançado desenvolvido para monitoramento e proteção. 

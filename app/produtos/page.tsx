@@ -8,12 +8,12 @@ import Image from 'next/image'
 // Produtos de exemplo
 const produtos = [
   {
-    id: "site-profissional",
-    title: "Site Profissional",
-    desc: "Site completo e personalizado com design moderno, responsivo e otimizado para SEO. Ideal para empresas que buscam presença digital profissional.",
-    image: "/images/products/site-pro.jpg",
+    id: "site-institucional",
+    title: "Site Institucional",
+    desc: "Site profissional para sua empresa com design moderno e responsivo.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000",
+    categoria: "sites",
     preco: "R$ 997,00",
-    categoria: "Sites",
     recursos: [
       "Design Responsivo",
       "Otimização SEO",
@@ -24,28 +24,12 @@ const produtos = [
     ]
   },
   {
-    id: "landing-page-pro",
-    title: "Landing Page Profissional",
-    desc: "Página de conversão otimizada para transformar visitantes em clientes. Design focado em resultados e alta taxa de conversão.",
-    image: "/images/products/landing-pro.jpg",
-    preco: "R$ 497,00",
-    categoria: "Landing Pages",
-    recursos: [
-      "Design Persuasivo",
-      "Otimização para Conversão",
-      "Formulários Otimizados",
-      "A/B Testing",
-      "Analytics Avançado",
-      "Pixel de Rastreamento"
-    ]
-  },
-  {
-    id: "ecommerce-starter",
-    title: "E-commerce Starter",
-    desc: "Loja virtual completa com sistema de pagamentos, gestão de produtos e painel administrativo. Comece a vender online hoje mesmo.",
-    image: "/images/products/ecommerce.jpg",
+    id: "ecommerce",
+    title: "E-commerce",
+    desc: "Loja virtual completa com sistema de pagamentos e gestão de produtos.",
+    image: "https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1000",
+    categoria: "sites",
     preco: "R$ 1.997,00",
-    categoria: "E-commerce",
     recursos: [
       "Painel Administrativo",
       "Gestão de Produtos",
@@ -56,12 +40,28 @@ const produtos = [
     ]
   },
   {
-    id: "blog-profissional",
+    id: "landing-page",
+    title: "Landing Page",
+    desc: "Página de captura otimizada para conversão de leads.",
+    image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80&w=1000",
+    categoria: "sites",
+    preco: "R$ 497,00",
+    recursos: [
+      "Design Persuasivo",
+      "Otimização para Conversão",
+      "Formulários Otimizados",
+      "A/B Testing",
+      "Analytics Avançado",
+      "Pixel de Rastreamento"
+    ]
+  },
+  {
+    id: "blog",
     title: "Blog Profissional",
-    desc: "Blog personalizado com sistema de gestão de conteúdo, categorias e tags. Perfeito para criar e gerenciar conteúdo de qualidade.",
-    image: "/images/products/blog-pro.jpg",
+    desc: "Blog com sistema de gerenciamento de conteúdo e SEO otimizado.",
+    image: "https://images.unsplash.com/photo-1432821596592-e2c18b78144f?auto=format&fit=crop&q=80&w=1000",
+    categoria: "sites",
     preco: "R$ 747,00",
-    categoria: "Blogs",
     recursos: [
       "Editor de Conteúdo",
       "Sistema de Comentários",
@@ -72,12 +72,12 @@ const produtos = [
     ]
   },
   {
-    id: "sistema-web",
-    title: "Sistema Web Personalizado",
-    desc: "Desenvolvimento de sistemas web sob medida para sua empresa. Automatize processos e aumente a eficiência do seu negócio.",
-    image: "/images/products/sistema.jpg",
+    id: "sistema",
+    title: "Sistema Web",
+    desc: "Sistema personalizado para automatizar processos do seu negócio.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000",
+    categoria: "sistemas",
     preco: "Consultar",
-    categoria: "Sistemas",
     recursos: [
       "Análise de Requisitos",
       "Desenvolvimento Sob Medida",
@@ -88,12 +88,12 @@ const produtos = [
     ]
   },
   {
-    id: "manutencao-mensal",
-    title: "Manutenção Mensal",
-    desc: "Serviço de manutenção e suporte mensal para seu site ou sistema. Mantenha seu projeto sempre atualizado e funcionando perfeitamente.",
-    image: "/images/products/manutencao.jpg",
+    id: "manutencao",
+    title: "Manutenção",
+    desc: "Suporte técnico e manutenção preventiva para seu site.",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1000",
+    categoria: "servicos",
     preco: "R$ 97,00/mês",
-    categoria: "Serviços",
     recursos: [
       "Atualizações de Segurança",
       "Backup Diário",
